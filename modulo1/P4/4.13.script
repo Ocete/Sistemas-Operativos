@@ -1,0 +1,9 @@
+# !/bin/bash
+# Nombre: 4.13.script
+
+rm crontab-reducelista
+echo ‘# minuto hora día-del-mes mes día-de-la-semana orden’ >> crontab-reducelista
+echo ‘# Nombre: crontab-reducelista’ >> crontab-reducelista
+echo "PATH="`pwd`"/:$HOME/Escritorio/DGIIM/SO/P4:"$PATH >> crontab-reducelista
+echo "* * * * * 4.11.script" >> crontab-reducelista
+crontab crontab-reducelista 2> /tmp/error

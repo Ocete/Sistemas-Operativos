@@ -1,0 +1,9 @@
+#!/bin/bash
+
+contador=1
+while test $contador -lt $1;
+do
+	let contador=$contador+1
+done
+printf "El valor de la variable es de $contador\n"
+

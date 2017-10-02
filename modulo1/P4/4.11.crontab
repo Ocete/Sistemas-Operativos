@@ -1,0 +1,3 @@
+# minuto hora día-del-mes mes día-de-la-semana orden
+# Nombre: 4.11.crontab
+* * * * * ~/Escritorio/DGIIM/SO/P4/4.11.script 2> /tmp/error

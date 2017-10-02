@@ -1,0 +1,6 @@
+#!/bin/bash
+
+nombrearchivo=~/Escritorio/DGIIM/SO/P4/`date +%Y-%j-%T`
+ps -ef | head -1 > $nombrearchivo
+ps -ef | tail -4 >> $nombrearchivo
+echo Mi pid = $$ >> $nombrearchivo

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+vmstat 1 20 &
+var="1"
+while test $var -le "500000" ; do
+	var=$[$var + 1]
+done
+echo "Fin"

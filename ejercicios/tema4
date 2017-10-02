@@ -1,0 +1,154 @@
+<h1 id="actividades-3-4-9-10-y-11">ACTIVIDADES 3, 4, 9, 10 y 11</h1>
+<h3 id="en-la-siguiente-figura-se-representa-una-tabla-fat.-al-borde-de-sus-entradas-se-ha-escrito-como-ayuda-de-referencia-el-número-correspondiente-al-bloque-en-cuestión.-también-se-ha-representado-la-entrada-de-cierto-directorio.-como-simplificación-del-ejemplo-suponemos-que-en-cada-entrada-del-directorio-se-almacena-nombre-de-archivodirectorio-el-tipo-farchivo-ddirectorio-la-fecha-de-creación-y-el-número-del-bloque-inicial.-tenga-en-cuenta-que">3. En la siguiente figura se representa una tabla FAT. Al borde de sus entradas se ha escrito, como ayuda de referencia, el número correspondiente al bloque en cuestión. También se ha representado la entrada de cierto directorio. Como simplificación del ejemplo, suponemos que en cada entrada del directorio se almacena: Nombre de archivo/directorio, el tipo (F=archivo, D=directorio), la fecha de creación y el número del bloque inicial. Tenga en cuenta que:</h3>
+<ul>
+<li>el tamaño de bloque es de 512 bytes</li>
+<li>el asterisco indica último bloque</li>
+<li>todo lo que está en blanco en la figura está libre.</li>
+</ul>
+<h3 id="rellene-la-figura-para-representar-lo-siguiente">Rellene la figura para representar lo siguiente:</h3>
+<ul>
+<li>Creación del archivo DATOS1 con fecha 1-3-90, y tamaño de 10 bytes.</li>
+<li>Creación del archivo DATOS2 con fecha 2-3-90, y tamaño 1200 bytes.</li>
+<li>El archivo DATOS aumenta de tamaño, necesitando 2 bloques más.</li>
+<li>Creación del directorio D, con fecha 3-3-90, y tamaño 1 bloque.</li>
+<li>Creación del archivo CARTAS con fecha 13-3-90 y tamaño 2 kBytes.</li>
+</ul>
+<p>Los archivos DATOS1, DATOS2 y D ocuparán 1, 3 y 1 bloque respectivamente. El archivo DATOS pasará a ocupar 4 bloques, le añadiremos los dos extra a partir de su fin de archivo. Por último, como la FAT32 no guarda los punteros de una tabla a la siguiente sino que guarda una tabla aparte, los 512B de cada bloque son aprovechables por el archivo, por lo que el archivo CARTAS ocupará unicamente 4 bloques.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Nombre</th>
+<th align="center">Tipo</th>
+<th align="center">Fecha</th>
+<th align="center">Nº Bloque</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">DATOS</td>
+<td align="center">F</td>
+<td align="center">8-2-90</td>
+<td align="center">3</td>
+</tr>
+<tr class="even">
+<td align="center">DATOS1</td>
+<td align="center">F</td>
+<td align="center">1-3-90</td>
+<td align="center">7</td>
+</tr>
+<tr class="odd">
+<td align="center">DATOS2</td>
+<td align="center">F</td>
+<td align="center">2-3-90</td>
+<td align="center">4</td>
+</tr>
+<tr class="even">
+<td align="center">D</td>
+<td align="center">D</td>
+<td align="center">3-3-90</td>
+<td align="center">10</td>
+</tr>
+<tr class="odd">
+<td align="center">CARTAS</td>
+<td align="center">F</td>
+<td align="center">13-3-90</td>
+<td align="center">8</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr class="header">
+<th align="left">FAT</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="left">-</td>
+<td align="left">10</td>
+<td align="left">*{D}</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="left">-</td>
+<td align="left">11</td>
+<td align="left">*(DATOS)</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="left">15</td>
+<td align="left">12</td>
+<td align="left">13</td>
+</tr>
+<tr class="even">
+<td align="left">4</td>
+<td align="left">6</td>
+<td align="left">13</td>
+<td align="left">14</td>
+</tr>
+<tr class="odd">
+<td align="left">5</td>
+<td align="left">*(D2)</td>
+<td align="left">14</td>
+<td align="left">*(CARTAS)</td>
+</tr>
+<tr class="even">
+<td align="left">6</td>
+<td align="left">5</td>
+<td align="left">15</td>
+<td align="left">9</td>
+</tr>
+<tr class="odd">
+<td align="left">7</td>
+<td align="left">*(D1)</td>
+<td align="left">16</td>
+<td align="left">-</td>
+</tr>
+<tr class="even">
+<td align="left">8</td>
+<td align="left">12</td>
+<td align="left">17</td>
+<td align="left">-</td>
+</tr>
+<tr class="odd">
+<td align="left">9</td>
+<td align="left">11</td>
+<td align="left">18</td>
+<td align="left">-</td>
+</tr>
+</tbody>
+</table>
+<p>Nota: &quot;-&quot; indica que el bloque no está en uso.</p>
+<h3 id="si-usamos-un-mapa-de-bits-para-la-gestión-del-espacio-libre-especifique-la-sucesión-de-bits-que-contendría-respecto-a-los-18-bloques-del-ejercicio-anterior.">4. Si usamos un Mapa de Bits para la gestión del espacio libre, especifique la sucesión de bits que contendría respecto a los 18 bloques del ejercicio anterior.</h3>
+<p><strong><em>1 si está ocupado, 0 si no está ocupado</em></strong></p>
+<p>001111111111111000</p>
+<h3 id="un-i-nodo-de-unix-tiene-10-direcciones-de-disco-para-los-diez-primeros-bloques-de-datos-y-tres-direcciones-más-para-realizar-una-indexación-a-uno-dos-y-tres-niveles.-si-cada-bloque-índice-tiene-256-direcciones-de-bloques-de-disco-cuál-es-el-tamaño-del-mayor-archivo-que-puede-ser-manejado-suponiendo-que-1-bloque-de-disco-es-de-1kbyte">9. Un i-nodo de UNIX tiene 10 direcciones de disco para los diez primeros bloques de datos, y tres direcciones más para realizar una indexación a uno, dos y tres niveles. Si cada bloque índice tiene 256 direcciones de bloques de disco, cuál es el tamaño del mayor archivo que puede ser manejado, suponiendo que 1 bloque de disco es de 1KByte?</h3>
+<p>Direccionamos 10 bloques de datos de forma directa, 256 bloques con el primer nivel de indexación, 256² bloques con el segundo nivel de indexación y 256³ bloques con el tercer nivel de indexación. Si cada bloque es de 1KB:</p>
+<p>Tamaño máximo = (10 + 256 + 256² + 256³) * 1KB = 16843018 KB = 16,06 GB</p>
+<h3 id="sobre-conversión-de-direcciones-lógicas-dentro-de-un-archivo-a-direcciones-físicas-de-disco.-estamos-utilizando-la-estrategia-de-indexación-a-tres-niveles-para-asignar-espacio-en-disco.-tenemos-que-el-tamaño-de-bloque-es-igual-a-512-bytes-y-el-tamaño-de-puntero-es-de-4-bytes.-se-recibe-la-solicitud-por-parte-de-un-proceso-de-usuario-de-leer-el-carácter-número-n-de-determinado-archivo.-suponemos-que-ya-hemos-leído-la-entrada-del-directorio-asociada-a-este-archivo-es-decir-tenemos-en-memoria-los-datos-primerbloque-y-tamaño.-calcule-la-sucesión-de-direcciones-de-bloque-que-se-leen-hasta-llegar-al-bloque-de-datos-que-posee-el-citado-carácter.">10. Sobre conversión de direcciones lógicas dentro de un archivo a direcciones físicas de disco. Estamos utilizando la estrategia de indexación a tres niveles para asignar espacio en disco. Tenemos que el tamaño de bloque es igual a 512 bytes, y el tamaño de puntero es de 4 bytes. Se recibe la solicitud por parte de un proceso de usuario de leer el carácter número N de determinado archivo. Suponemos que ya hemos leído la entrada del directorio asociada a este archivo, es decir, tenemos en memoria los datos PRIMERBLOQUE y TAMAÑO. Calcule la sucesión de direcciones de bloque que se leen hasta llegar al bloque de datos que posee el citado carácter.</h3>
+<p>Sabemos que cada bloque tiene un tamaño de 512 B. Como cada bloque tiene 512 B y cada puntero se almacena en 4B, cada tabla de indexado tendrá 512/4 = 128 entradas.</p>
+<p>En primer lugar tenemos que comprobar que estamos accediendo al programa y no fuera del mismo. Es decir, continuaremos con la conversicón si N &lt; TAMAÑO. Si se diese el caso contrario produciríamos una violación de segmento.</p>
+<p>En primer lugar accedemos a la primera tabla de indexado (cuya posición inicial es PRIMERBLOQUE). Para ello realizamos la operación N/(512*128²). El cociente de esta operación (C1) nos indica que posición de la tabla de indexado buscamos mientras que el resto (R1) nos servirá más adelante. La primera dirección a la que accedemos es entonces PRIMERBLOQUE + C1, cuyo valor almacenaremos en SEGUNDOBLOQUE, ya que tendrá la dirección de memoria donde comienza el segundo bloque de indexado.</p>
+<p>Para acceder a la tabla de segundo nivel de indexación realizamos un proceso similar al anterior. Dividiremos esta vez R1/(512*128), almacenando el cociente en C2 y el resto en R2. La posición a la que accederemos a continuación será SEGUNDOBLOQUE + C2, cuyo valor almacenaremos en TERCERBLOQUE.</p>
+<p>Repitimos el proceso con el tercer bloque: R2/512 almacenando el cociente en C3 y el resto en R3. Accedemos a la posición TERCERBLOQUE + C3 y guardamos su valor en BLOQUE. El valor R3 será el desplazamiento dentro del bloque. Finalmente, para obtener el carácter pedido accedemos a BLOQUE + R3.</p>
+<p>Las operaciones realizadas han sido las siguientes:</p>
+<p>Verificar N &lt; TAMAÑO C1 = N / (512 * 128²) R1 = N % (512 * 128²) <strong>SEGUNDOBLOQUE = M(PRIMERBLOQUE + C1)</strong>* C2 = R1 / (512 * 128) R2 = R1 % (512 * 128) <strong>TERCERBLOQUE = M(SEGUNDOBLOQUE + C2)</strong>* C3 = R2 / 512 R3 = R2 % 512 <strong>BLOQUE = M(SEGUNDOBLOQUE + C3)</strong>* <strong>CARACTER = M(BLOQUE + R3)</strong>* </p>
+<p>Donde los accesos a memoria están indicados con <strong><em>M(posición)</em></strong>.</p>
+<h3 id="qué-método-de-asignación-de-espacio-en-un-sistema-de-archivos-elegiría-para-maximizar-la-eficiencia-en-términos-de-velocidad-de-acceso-uso-del-espacio-de-almacenamiento-y-facilidad-de-modificación-añadirborrar-modificar-cuando-los-datos-son">11. ¿Qué método de asignación de espacio en un sistema de archivos elegiría para maximizar la eficiencia en términos de velocidad de acceso, uso del espacio de almacenamiento y facilidad de modificación (añadir/borrar /modificar), cuando los datos son:</h3>
+<ul>
+<li><strong>Modificados infrecuentemente, y accedidos frecuentemente de forma aleatoria</strong></li>
+</ul>
+<p><em>Métodos de Asignación de espacio: Contiguo.</em></p>
+<p>Como se modifica infrecuentemente, podemos asumir que el archivo no va a crecer, pudiendo utilizar este método sin el peligro de eficiencia que supone la compactación. Aunque también podríamos utilizar el método &quot;No contiguo indexado&quot;, utilizando éste ahorramos la tabla de asignación de archivos (la FAT), que no sería de especial utilidad en este caso particular.</p>
+<ul>
+<li><strong>Modificados con frecuencia, y accedidos en su totalidad con cierta frecuencia</strong></li>
+</ul>
+<p><em>Métodos de Asignación de espacio: No Contiguo - Enlazado</em></p>
+<p>Como se modifica de forma frecuente no puede ser &quot;Contiguo&quot;, además si es &quot;No Contiguo&quot; puede crecer dinámicamente sin que sea necesario compactar. Por otro lado, como se pide acceder totalmente con frecuencia, sabemos que &quot;No contiguo, Enlazado&quot; permite acceder secuencialmente (perfecto en nuestro caso al querer acceder en la totalidad del archivo) de forma efectiva.</p>
+<ul>
+<li><strong>Modificados frecuentemente y accedidos aleatoriamente y frecuentemente</strong></li>
+</ul>
+<p><em>Métodos de Asignación de espacio: No Contiguo - Indexado</em></p>
+<p>Por lo explicado en el apartado anterior, aquí tampoco sería recomendable utilizar acceso contiguo. Por otro lado, el &quot;No contiguo Indexado&quot; permite un buen acceso directo. Frente al método &quot;No contiguo Enlazado&quot; cuyo acceso directo es tremendamente ineficiente, este es sin duda el óptimo.</p>
+<p><strong>Trabajo realizado por:</strong>* José Antonio Álvarez Ocete* Alberto Estepa Fernández* Julio José Prado Muñoz* Carlos Santiago Sánchez Muñoz* </p>

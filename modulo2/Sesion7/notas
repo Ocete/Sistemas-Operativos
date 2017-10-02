@@ -1,0 +1,33 @@
+Se inicia el servidor, crea dos pipes con nombre (fifoe para entrada y fifos
+para salida, abre ambos de entrada salida para que no hayas fallos, aunque no
+vaya a usar ambos)
+
+Llega un cliente (escribe en fifoe su PID para pedir servicio, solo sirve para
+que el servidos (bloqueado con un read) sepa que tiene que actuar)
+
+Servidor va a ser un ciclo infinito hasta que le llegue una señal (crear un
+manejador de señales) y se cierra de buena forma.
+
+Cuando llega un cliente, se crea un H1, se lanza proxy y este lo lanza a
+impresión (sin impresora, utilizaremos la pantalla pero impidiendo que se
+impriman cosas de dos procesos distintos a la vez, exclusión mútua, sesión 6(?))
+
+El servidor es quien crea al Hijo H1, que hará exec(proxy), pero el H1 lee desde
+la entrada estandar. Pero antes de lanzar el exec, crea un fifo llamado fifo.PID
+(donde PID es el PID del hijo). El hijo escribe en fifos su PID, cliente lo lee
+y envía su trabajo de impresión a fifo.PID.
+
+Antes de lanzar el exec, el H1 cambia su entada estandar (0) y la sustituye por
+el fifo.PID (EN ESTE ORDEN, CREA EL FIFO, ESCRIBE EN FIFOS, ABRE EL FIFO EN MODO
+LECTURA, si lo hacemos al revés, se quedaría esperando bloqueado).
+
+No se nos olvide quitar el bloqueo de pantalla del proxy, pues si no se
+produciría interbloqueo. El proxy lee de su entrada estandar y lo va metiendo en
+un archivo temporal. Cuando termina de leer, lseek para poner el puntero de
+lectura-escritura y envía el trabajo a impresión con exclusión mútua.
+
+A tener en cuenta:
+
+Los proxys no se pueden quedar zombies, crear un manejador de señal con el wait
+dentro. Cuidado con manejar unos y otros no, crear un contador para esperarlos
+a todos.

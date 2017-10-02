@@ -1,0 +1,8 @@
+#!/bin/bash
+
+cp /fenix/depar/Isi/UML/*.gz/tmp
+cd /tmp
+gunzip *.gz
+chmod 766 kernel32-3.0.4
+./kernel32-3.0.4 ubda=./Fedora14-x86-root_fs
+mem=1024m

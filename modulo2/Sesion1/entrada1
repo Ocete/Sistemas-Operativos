@@ -1,0 +1,62 @@
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <errno.h>
+#include <string.h>
+
+
+int main(int argc, char *argv[]){
+	int fdread, fdwrite, read_length;
+	const int BLOCK_SIZE = 80;
+	char block[BLOCK_SIZE];
+	char pathname[1024];
+
+	if(argc < 2)
+		scanf("%s",pathname);
+	else
+		strcpy(pathname,argv[1]);
+
+	if(fdread=open(argv[1],O_RDONLY)<0) {
+		printf("\nError %d en open 1",errno);
+		perror("\nError en open 1");
+		exit(EXIT_FAILURE);
+	}
+
+	//Revisar el modo de acceso, el priemro solo lo abrimos para leer y el segundo solo pa estudiar.
+
+	if(fdwrite=open("salida.txt",O_CREAT|O_TRUNC|O_WRONLY,S_IRUSR|S_IWUSR)<0) {
+		printf("\nError %d en open 2",errno);
+		perror("\nError en open 2");
+		exit(EXIT_FAILURE);
+	}
+
+	int i=0;
+
+	do{
+		if(read_length = read(fdread, block, BLOCK_SIZE) < 0){
+			perror("\nError en lectura");
+			exit(EXIT_FAILURE);
+		}
+
+		fprintf(argv[1], "%s%d\n\n", "Bloque ", i);
+		i++;
+
+		if(write(fdwrite,block,BLOCK_SIZE) < read_length) {
+			perror("\nError en escritura");
+			exit(EXIT_FAILURE);
+		}
+
+	}while (read_length == BLOCK_SIZE);
+
+	if(lseek(fdwrite,0,SEEK_SET) < 0) {
+		perror("\nError en lseek");
+		exit(EXIT_FAILURE);
+	}
+
+	fprintf(argv[1], "%s%d\n", "El número de bloques es ", i);
+
+	return 0;
+}

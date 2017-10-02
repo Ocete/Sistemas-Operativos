@@ -1,0 +1,2 @@
+# minuto hora día-del-mes mes día-de-la-semana orden
+* * * * * rm -v /tmp/varios/core* > /tmp/listacores

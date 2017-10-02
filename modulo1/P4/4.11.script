@@ -1,0 +1,6 @@
+#!/bin/bash
+# Nombre: 4.11.script
+
+cat /tmp/listacores | head -n 10 > /tmp/aux
+mv /tmp/aux /tmp/listacores
+
